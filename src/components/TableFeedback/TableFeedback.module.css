@@ -1,0 +1,9 @@
+.tableFeedbackHeader {
+    width: 100%;
+    text-align: center;
+}
+.tableFeedbackItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

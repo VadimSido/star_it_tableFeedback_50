@@ -1,0 +1,14 @@
+table {
+    width: 100%;
+    height: 7vh;
+  }
+  td {
+    width: 25%;
+    border : 2px solid black;
+    padding-left: 10px;
+    vertical-align: middle;
+    font-size: 1.5em;
+  }
+  .active {
+    background: rgb(87, 143, 216);
+  }
