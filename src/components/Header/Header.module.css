@@ -12,3 +12,8 @@ table {
   .active {
     background: rgb(87, 143, 216);
   }
+  @media only screen and (max-width: 640px) {
+    td {
+      font-size: 0.7em;
+    }
+  }

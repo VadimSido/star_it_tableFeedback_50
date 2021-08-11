@@ -1,9 +1,15 @@
+.tableFeedback {
+    display: flex;
+    flex-direction: column;
+}
 .tableFeedbackHeader {
-    width: 100%;
     text-align: center;
 }
 .tableFeedbackItem {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+}
+.tableFeedbackHeaderHide {
+    visibility: hidden;
 }
