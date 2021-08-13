@@ -1,8 +1,6 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styles from './TableFeedback.module.css';
 import DataTable from 'react-data-table-component';
-import photogr from '../../assets/Hotel.jpg';
-
 
 const TableFeedback = () => {
 
@@ -25,101 +23,59 @@ const TableFeedback = () => {
                 maxWidth : '100vw',
             },
         },
+    };
+
+    const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [data, setData] = useState([]);
+    const [dataObject, setDataObject] = useState([]);
+    const dataFull = [];
+
+    useEffect(() => {
+        fetch('https://starit-api.herokuapp.com/api/feedback')
+            .then(rez => rez.json())
+            .then(
+                (rezult) => {
+                    setIsLoaded(true);
+                    setData(rezult);
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error);
+                }
+            )
+    },[]);
+
+    useEffect(() => {
+        fetch('https://starit-api.herokuapp.com/api/fbo')
+            .then(rez => rez.json())
+            .then(
+                (rezult) => {
+                    setIsLoaded(true);
+                    setDataObject(rezult);
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error);
+                }
+            )
+    },[]);
+
+      
+    for (let i=0; i<data.length; i++) {
+        let fbo_id = data[i].fbo_id - 1;
+        let strImg = data[i].photo;
+        dataFull[i] = {
+            id: data[i].id,
+            point: dataObject[fbo_id].object_name,
+            stars: data[i].stars,
+            comment: data[i].comment,
+            photo: data[i].photo,
+            date: data[i].date,
+            reaction: (data[i].reaction_needed)?'Yes':'No'
+        }
     }
-
-    const data = [
-        {
-            id: 1,
-            address: 'service',
-            stars: 3,
-            note: 'Very very good Very very good Very very good Very very good Very very good Very very good Very very good' ,
-            date: '05/21/2021',
-            time: '13:04',
-            photo: '../../assets/Hotel.jpg',
-        },
-        {
-            id: 2,
-            address: 'reception',
-            stars: 5,
-            note: 'Very very good',
-            date: '04/01/2021',
-            time: '13:04',
-        },
-        {
-            id: 3,
-            address: 'hall',
-            stars: 2,
-            note:'Very very good',
-            date: '05/15/2021',
-            time: '13:04',
-        },
-        {
-            id: 4,
-            address: 'restaurant',
-            stars: 1,
-            note: 'Very very good',
-            date: '03/27/2021',
-            time: '13:04',
-        },
-        {
-            id: 5,
-            address: 'food',
-            stars: 4,
-            note: 'Very very good',
-            date: '04/12/2021',
-            time: '13:04',
-        },
-        {
-            id: 6,
-            address: 'dishes',
-            stars: 2,
-            note: 'Very very good',
-            date: '03/01/2021',
-            time: '13:04',
-        },
-        {
-            id: 7,
-            address: 'bathroom',
-            stars: 5,
-            note: 'Very very good',
-            date: '02/21/2021',
-            time: '13:04',
-        },
-        {
-            id: 8,
-            address: 'tv',
-            stars: 5,
-            note: 'Very very good',
-            date: '05/26/2021',
-            time: '13:04',
-        },
-        {
-            id: 9,
-            address: 'window',
-            stars: 5,
-            note: 'Very very good',
-            date: '01/11/2021',
-            time: '13:04',
-        },
-        {
-            id: 10,
-            address: 'table',
-            stars: 2,
-            note: 'Very very good',
-            date: '04/21/2021',
-            time: '13:04',
-        },
-        {
-            id: 11,
-            address: 'room',
-            stars: 4,
-            note: 'Very very good',
-            date: '05/15/2021',
-            time: '13:04',
-        },
-    ];
-   
-
+    console.log('dataFull',dataFull);
 
     const columns = [
         {
@@ -130,7 +86,7 @@ const TableFeedback = () => {
         },
         {
             name: 'Object Name',
-            selector: 'address',
+            selector: 'point',
             sortable: true,
             center: true,
             compact: true,
@@ -152,7 +108,7 @@ const TableFeedback = () => {
                     <div className={styles.tableFeedbackHeader}>Feedbacks</div>
                     <div className={styles.tableFeedbackItem}>Note</div>
                 </div>,
-            selector: 'note',
+            selector: 'comment',
             sortable: false,
             center: true,
             compact: true,
@@ -169,7 +125,7 @@ const TableFeedback = () => {
             center: true,
             compact: true,
             hide: 'md',
-            cell: d => <img height="auto" width="100px" alt={d.photo} src={photogr} />
+            cell: row => <img height="auto" width="100px" alt={row.photo} src={row.photo} />
         },
         {
             name: 'Date',
@@ -177,15 +133,7 @@ const TableFeedback = () => {
             sortable: true,
             center: true,
             compact: true,  
-            width: '80px',         
-        },
-        {
-            name: 'Time',
-            selector: 'time',
-            sortable: false,
-            width: '50px',
-            compact: true,
-            hide: 'sm',
+            width: '130px',         
         },
         {
             name: 'Reaction',
@@ -196,19 +144,29 @@ const TableFeedback = () => {
             hide: 'sm',
         },
     ];
-    return(
-        <div>
-        <DataTable
-            columns={columns}
-            data={data}
-            pagination
-            paginationPerPage={5}
-            paginationRowsPerPageOptions={[5,10]}
-            customStyles={customStyles}
-            striped={true}
-        />
-        </div>
-    );
+
+    if (error) {
+        return <div>ERROR: {error.message}</div>
+    }
+    else if (!isLoaded) {
+        return <div>Loading...</div>
+    }
+    else {
+        return(
+            <div>
+            <DataTable
+                columns={columns}
+                data={dataFull}
+                pagination
+                paginationPerPage={5}
+                paginationRowsPerPageOptions={[5,10]}
+                customStyles={customStyles}
+                striped={true}
+            />
+            </div>
+        );
+    };
 }
+
 
 export default TableFeedback;
