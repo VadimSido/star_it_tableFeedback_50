@@ -1,0 +1,9 @@
+.container {
+    width: 100%;
+    display: flex;
+
+}
+.itemImg {
+    width: 100px;
+    height: auto;
+}

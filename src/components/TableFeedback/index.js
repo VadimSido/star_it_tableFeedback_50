@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import styles from './TableFeedback.module.css';
 import DataTable from 'react-data-table-component';
+import ImageView from '../ImageView';
 
 const TableFeedback = () => {
 
@@ -32,21 +33,6 @@ const TableFeedback = () => {
     const dataFull = [];
 
     useEffect(() => {
-        fetch('https://starit-api.herokuapp.com/api/feedback')
-            .then(rez => rez.json())
-            .then(
-                (rezult) => {
-                    setIsLoaded(true);
-                    setData(rezult);
-                },
-                (error) => {
-                    setIsLoaded(true);
-                    setError(error);
-                }
-            )
-    },[]);
-
-    useEffect(() => {
         fetch('https://starit-api.herokuapp.com/api/fbo')
             .then(rez => rez.json())
             .then(
@@ -61,21 +47,63 @@ const TableFeedback = () => {
             )
     },[]);
 
+    useEffect(() => {
+        fetch('https://starit-api.herokuapp.com/api/feedback')
+            .then(rez => rez.json())
+            .then(
+                (rezult) => {
+                    setIsLoaded(true);
+                    setData(rezult);
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error);
+                }
+            )
+    },[]);
+
       
     for (let i=0; i<data.length; i++) {
         let fbo_id = data[i].fbo_id - 1;
         let strImg = data[i].photo;
+        let strImgArray = [];
+        let pos = 0;
+        if ((i === 5) || (i === 8)) {
+            strImgArray.push('');
+        }
+        else {
+        while (true) {
+            let foundPos = strImg.indexOf('==',pos);
+            if (foundPos === -1) {
+                if (strImg[pos] === 'd') {
+                    strImgArray.push(strImg.slice(pos));
+                }
+                break
+            };
+            if (strImg[pos] === ',') {
+                strImgArray.push(strImg.slice(pos+1,foundPos));
+                pos = foundPos + 3;
+            }
+            else {
+                strImgArray.push(strImg.slice(pos,foundPos));
+                pos = foundPos + 2;
+            }
+        };
+
+        if ((strImgArray[0] === undefined) && (strImg[0] === 'd')) {
+            strImgArray.push(strImg.slice(0));
+        };
+    }
         dataFull[i] = {
             id: data[i].id,
             point: dataObject[fbo_id].object_name,
             stars: data[i].stars,
             comment: data[i].comment,
-            photo: data[i].photo,
+            photo: strImgArray,
             date: data[i].date,
             reaction: (data[i].reaction_needed)?'Yes':'No'
         }
     }
-    console.log('dataFull',dataFull);
 
     const columns = [
         {
@@ -125,7 +153,7 @@ const TableFeedback = () => {
             center: true,
             compact: true,
             hide: 'md',
-            cell: row => <img height="auto" width="100px" alt={row.photo} src={row.photo} />
+            cell: row => <ImageView photo={row.photo} />                       
         },
         {
             name: 'Date',
