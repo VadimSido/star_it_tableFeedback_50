@@ -1,23 +1,22 @@
 {
   "files": {
-    "main.css": "/star_it_tableFeedback_50/static/css/main.786367ab.chunk.css",
-    "main.js": "/star_it_tableFeedback_50/static/js/main.23659c5a.chunk.js",
-    "main.js.map": "/star_it_tableFeedback_50/static/js/main.23659c5a.chunk.js.map",
-    "runtime-main.js": "/star_it_tableFeedback_50/static/js/runtime-main.47dc4bf5.js",
-    "runtime-main.js.map": "/star_it_tableFeedback_50/static/js/runtime-main.47dc4bf5.js.map",
-    "static/js/2.36e01776.chunk.js": "/star_it_tableFeedback_50/static/js/2.36e01776.chunk.js",
-    "static/js/2.36e01776.chunk.js.map": "/star_it_tableFeedback_50/static/js/2.36e01776.chunk.js.map",
-    "static/js/3.99a94f16.chunk.js": "/star_it_tableFeedback_50/static/js/3.99a94f16.chunk.js",
-    "static/js/3.99a94f16.chunk.js.map": "/star_it_tableFeedback_50/static/js/3.99a94f16.chunk.js.map",
+    "main.css": "/star_it_tableFeedback_50/static/css/main.59e36abc.chunk.css",
+    "main.js": "/star_it_tableFeedback_50/static/js/main.0c80ce34.chunk.js",
+    "main.js.map": "/star_it_tableFeedback_50/static/js/main.0c80ce34.chunk.js.map",
+    "runtime-main.js": "/star_it_tableFeedback_50/static/js/runtime-main.d4d98729.js",
+    "runtime-main.js.map": "/star_it_tableFeedback_50/static/js/runtime-main.d4d98729.js.map",
+    "static/js/2.3bba628c.chunk.js": "/star_it_tableFeedback_50/static/js/2.3bba628c.chunk.js",
+    "static/js/2.3bba628c.chunk.js.map": "/star_it_tableFeedback_50/static/js/2.3bba628c.chunk.js.map",
+    "static/js/3.b7c371c0.chunk.js": "/star_it_tableFeedback_50/static/js/3.b7c371c0.chunk.js",
+    "static/js/3.b7c371c0.chunk.js.map": "/star_it_tableFeedback_50/static/js/3.b7c371c0.chunk.js.map",
     "index.html": "/star_it_tableFeedback_50/index.html",
-    "static/css/main.786367ab.chunk.css.map": "/star_it_tableFeedback_50/static/css/main.786367ab.chunk.css.map",
-    "static/js/2.36e01776.chunk.js.LICENSE.txt": "/star_it_tableFeedback_50/static/js/2.36e01776.chunk.js.LICENSE.txt",
-    "static/media/Hotel.6ffb5fc9.jpg": "/star_it_tableFeedback_50/static/media/Hotel.6ffb5fc9.jpg"
+    "static/css/main.59e36abc.chunk.css.map": "/star_it_tableFeedback_50/static/css/main.59e36abc.chunk.css.map",
+    "static/js/2.3bba628c.chunk.js.LICENSE.txt": "/star_it_tableFeedback_50/static/js/2.3bba628c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.47dc4bf5.js",
-    "static/js/2.36e01776.chunk.js",
-    "static/css/main.786367ab.chunk.css",
-    "static/js/main.23659c5a.chunk.js"
+    "static/js/runtime-main.d4d98729.js",
+    "static/js/2.3bba628c.chunk.js",
+    "static/css/main.59e36abc.chunk.css",
+    "static/js/main.0c80ce34.chunk.js"
   ]
 }
